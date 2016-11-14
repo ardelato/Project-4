@@ -41,6 +41,11 @@ public class Square
 		this.row = row;
 		this.col = col;
 	}
+	public Square(int row, int col)
+	{
+		this.row = row;
+		this.col = col;
+	}
 	public boolean wall(int direction)
 	{return walls[direction];}
 	
