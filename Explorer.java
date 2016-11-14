@@ -36,6 +36,8 @@ public class Explorer extends Occupant{
 //Method
 	//a function to return the "name" of the Explorer
 	/* simply return the name variable*/
+	public Explorer(Maze maze)
+	{this.m = maze;}
 	public String name(){
 		return name;
 	}
