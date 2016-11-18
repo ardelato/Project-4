@@ -36,4 +36,9 @@ public class Treasure extends RandomOccupant
 	{ this.foundTreasure = true;}
 	
 	public void move(){}
+
+	public String toText(char delimiter)
+	{
+		return(super.toText(delimiter) + delimiter + Boolean.toString(this.found));
+	}
 }

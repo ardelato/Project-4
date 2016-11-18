@@ -115,6 +115,9 @@ public class Explorer extends Occupant{
 		s.enter();
 		m.lookAround(s);
 	}
-	
+	public String toText(char delimiter)
+	{
+		return (super.toText(delimiter) + delimiter + this.name);
+	}	
 }
 	  

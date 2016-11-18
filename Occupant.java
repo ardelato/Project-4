@@ -9,7 +9,7 @@
  *@version Fall 2016
  *@version 10/28/16
  */
-public abstract class Occupant
+public abstract class Occupant implements DelimitedTextIO
 {
 //instance variables
 	//make a Square type variable representing location of the object 
@@ -43,6 +43,14 @@ public abstract class Occupant
 	{
 		square_location = new_location;
 	}
+	public String toText(char delimiter)
+	{
+		return(this.getClass().getName()+delimiter+Integer.toString(square_location.row())+delimiter+Integer.toString(square_location.col()));
+	}
+	/*public void toObject(Scanner input)
+	{
+		
+	}*/
 }
 
 	

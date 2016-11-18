@@ -6,7 +6,7 @@
  * @version Fall 2016
  */
 
-public class Square
+public class Square implements DelimitedTextIO
 {
 
 //a public constant variable named SQUARE_SIZE with a value of 50 
@@ -86,6 +86,16 @@ public class Square
 		if (this.treasure != null)
 			{treasure.setFound();}
 	}
+	public String toText(char delimiter)
+	{
+		return(this.getClass().getName() + delimiter + Integer.toString(this.row) + delimiter + Integer.toString(this.col) + 
+			delimiter + Boolean.toString(walls[UP]) + delimiter + Boolean.toString(walls[RIGHT]) + delimiter + Boolean.toString(walls[DOWN])
+			+ delimiter + Boolean.toString(walls[LEFT]) + delimiter + Boolean.toString(this.seen) + delimiter + Boolean.toString(this.inView));
+	}
+	/*public void toObject(Scanner input)
+	{
+
+	}*/
 }
 		
 
