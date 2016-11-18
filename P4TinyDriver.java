@@ -62,15 +62,13 @@ public class P4TinyDriver
             
             // comment the stuff after this out to test initial "write" code
             maze2 = new Maze();
-            maze2.readMazeFromFile("test.txt"); // or read from mazeGood.txt
+            //maze2.readMazeFromFile("test.txt"); // or read from mazeGood.txt
 
             // try also reading from a known bad file to see if exceptions are thrown.
             maze2.writeMazeToFile("test2.txt"); // test2.txt should be identical to test.txt
             
             System.out.println("No Exceptions.");
-        }
-        catch (MazeReadException e)
-        {
+        } catch (MazeReadException e) {
             System.out.println("**** " + e.getMessage());
             System.out.println("**** " + e.getLine());
             System.out.println("**** Line: " + e.getLineNum());

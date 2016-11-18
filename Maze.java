@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 /**
  * Class that contains all the logic to model a Maze with Treasures, Monsters, and an Explorer.
@@ -35,6 +36,10 @@ public class Maze
       // CHANGE - create the empty ArrayList of RandomOccupants
       randOccupants = new ArrayList<RandomOccupant>();
    }
+   public Maze()
+   {
+    randOccupants = new ArrayList<RandomOccupant>();
+   }
 	
    // QUERIES
    public Square getSquare(int row, int col){ 
@@ -58,7 +63,9 @@ public class Maze
    // COMMANDS
    // CHANGE - implement the following method
    public void addRandomOccupant(RandomOccupant ro) 
-  {randOccupants.add(ro);}
+   {
+    randOccupants.add(ro);
+  }
 	
    public void setExplorer(Explorer e) {explorer = e;}
 	
@@ -186,4 +193,98 @@ public class Maze
          }
       }
    }
-}
+   public void writeMazeToFile(String fileName) throws IOException
+   {
+      try{
+        char delimiter = ',';
+        File file = new File(fileName);
+        if(!file.exists())
+          file.createNewFile();
+        FileWriter writer = new FileWriter(file.getName());
+        BufferedWriter bwriter = new BufferedWriter(writer);
+        bwriter.write(Integer.toString(this.rows) + delimiter + Integer.toString(this.cols));
+        bwriter.newLine();
+        for(int x = 0; x < rows; x++)
+        {  for(int y = 0; y < cols; y++)
+            {
+              bwriter.write(squares[x][y].toText(delimiter));
+              bwriter.newLine();
+            }
+        }
+        bwriter.write(explorer.toText(delimiter));
+        bwriter.newLine();
+        for(int i = 0; i < randOccupants.size(); i++)
+        {
+          bwriter.write(randOccupants.get(i).toText(delimiter));
+          bwriter.newLine();
+        }
+        bwriter.close();
+      } catch (IOException ioe) {
+        System.err.println("IOException:" + ioe.getMessage());
+      }
+    }
+    public void readMazeFromFile(String fileName) throws IOException, FileNotFoundException,
+    MazeReadException
+    {
+        Maze maze = new Maze();
+        String delimiter = ",";
+        Scanner fileReader = new Scanner(fileName);
+        int lineCounter = 1;
+        String line = fileReader.nextLine();
+        //starting to read each string within the line
+        Scanner input = new Scanner(line).useDelimiter(delimiter);
+        // starting to read each line
+        while(fileReader.hasNextLine())
+        {
+          if(lineCounter == 1)
+          {
+            if(input.hasNextInt()){
+              int rows = input.nextInt();
+              int cols = input.nextInt();
+              this.squares = new Square[rows][cols];
+              lineCounter++;
+            }
+            else
+              throw new MazeReadException("Rows and columns not specified." , line, lineCounter);
+          }
+          else
+          {
+            try{
+                String className = input.next();
+                switch(className){
+                  case "Square":
+                    int r = input.nextInt();
+                    int c = input.nextInt(); 
+                    Square s = new Square(r,c);
+                    s.toObject(input);
+                    if(this.squares[s.row()][s.col()] != null)
+                      throw new MazeReadException("Duplicate Square", line, lineCounter);
+                    break;
+                  case "Explorer":
+                    Explorer e = new Explorer(maze);
+                    e.toObject(input);
+                    this.explorer = e;
+                    break;
+                  case "Monster":
+                    Monster mon = new Monster(maze);
+                    mon.toObject(input);
+                    randOccupants.add(mon);
+                    break;
+                  case "Treasure":
+                    Treasure t = new Treasure(maze);
+                    t.toObject(input);
+                    randOccupants.add(t);
+                    break;
+                  default:
+                    throw new MazeReadException("Unknown type", line, lineCounter);
+                } 
+              }catch(Exception e) {
+                throw new MazeReadException("Line format or other error", line, lineCounter);
+              }
+            lineCounter++;
+          }
+        }
+        input.close();
+        fileReader.close();
+    }
+  }

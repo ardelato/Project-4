@@ -5,7 +5,8 @@
  * @version CPE102-05
  * @version Fall 2016
  */
-
+import java.lang.*;
+import java.util.*;
 
 public class Treasure extends RandomOccupant
 {
@@ -39,6 +40,11 @@ public class Treasure extends RandomOccupant
 
 	public String toText(char delimiter)
 	{
-		return(super.toText(delimiter) + delimiter + Boolean.toString(this.found));
+		return(super.toText(delimiter) + delimiter + Boolean.toString(this.foundTreasure));
+	}
+	public void toObject(Scanner input)
+	{
+		super.toObject(input);
+		this.foundTreasure = input.nextBoolean();
 	}
 }

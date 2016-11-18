@@ -10,6 +10,8 @@
  *@version 10/28/16
  */
 import java.awt.event.KeyEvent;
+import java.util.*;
+import java.lang.*;
 
 
 public class Explorer extends Occupant{
@@ -119,5 +121,10 @@ public class Explorer extends Occupant{
 	{
 		return (super.toText(delimiter) + delimiter + this.name);
 	}	
+	public void toObject(Scanner input)
+	{
+		super.toObject(input);
+		this.name = input.next();
+	}
 }
 	  

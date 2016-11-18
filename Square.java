@@ -5,6 +5,8 @@
  * @version CPE102-05
  * @version Fall 2016
  */
+import java.lang.*;
+import java.util.*;
 
 public class Square implements DelimitedTextIO
 {
@@ -90,12 +92,17 @@ public class Square implements DelimitedTextIO
 	{
 		return(this.getClass().getName() + delimiter + Integer.toString(this.row) + delimiter + Integer.toString(this.col) + 
 			delimiter + Boolean.toString(walls[UP]) + delimiter + Boolean.toString(walls[RIGHT]) + delimiter + Boolean.toString(walls[DOWN])
-			+ delimiter + Boolean.toString(walls[LEFT]) + delimiter + Boolean.toString(this.seen) + delimiter + Boolean.toString(this.inView));
+			+ delimiter + Boolean.toString(walls[LEFT]) + delimiter + Boolean.toString(this.seen) + delimiter + Boolean.toString(this.in_View));
 	}
-	/*public void toObject(Scanner input)
+	public void toObject(Scanner input)
 	{
-
-	}*/
+		this.walls[UP] = input.nextBoolean(); 
+		this.walls[RIGHT] = input.nextBoolean();
+		this.walls[DOWN] = input.nextBoolean();
+		this.walls[LEFT] = input.nextBoolean();
+		this.seen = input.nextBoolean();
+		this.in_View = input.nextBoolean();
+	}
 }
 		
 

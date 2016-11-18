@@ -14,6 +14,7 @@ public Monster - Maze maze
 public Monster - Maze maze, long seed
 public Monster - Maze maze, Square location
  */
+import java.util.*;
 
 public class Monster extends RandomOccupant{
 	
@@ -32,5 +33,9 @@ public class Monster extends RandomOccupant{
 	public String toText(char delimiter)
 	{
 		return(super.toText(delimiter));
+	}
+	public void toObject(Scanner input)
+	{
+		super.toObject(input);
 	}
 }

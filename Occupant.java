@@ -9,6 +9,9 @@
  *@version Fall 2016
  *@version 10/28/16
  */
+import java.lang.*;
+import java.util.*;
+
 public abstract class Occupant implements DelimitedTextIO
 {
 //instance variables
@@ -47,10 +50,13 @@ public abstract class Occupant implements DelimitedTextIO
 	{
 		return(this.getClass().getName()+delimiter+Integer.toString(square_location.row())+delimiter+Integer.toString(square_location.col()));
 	}
-	/*public void toObject(Scanner input)
+	public void toObject(Scanner input)
 	{
-		
-	}*/
+		int row = input.nextInt();
+		int col = input.nextInt();
+		Square s = new Square(row,col);
+		moveTo(s);
+	}
 }
 
 	

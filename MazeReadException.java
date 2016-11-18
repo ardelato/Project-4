@@ -7,7 +7,7 @@ public class MazeReadException extends Exception
 	{
 		super(message);
 		this.line = line;
-		this.lineNumber;
+		this.lineNumber = lineNumber;
 	}
 	public String getLine()
 	{return line;}
