@@ -1,12 +1,8 @@
-
-public class P4TinyDriver
+public class Driver
 {
-   private static Square[][] fixedSquares = new Square[5][5];
-   
-   public static void main(String[] args) throws Exception
-   {
-       // Set up maze for unit tests
-       fixedSquares[0][0] = new Square(true, false, false, true, 0, 0);
+	public static void main(String[] args) {
+		Square[][] fixedSquares = new Square[5][5];
+		fixedSquares[0][0] = new Square(true, false, false, true, 0, 0);
        fixedSquares[0][1] = new Square(true, false, true, false, 0, 1);
        fixedSquares[0][2] = new Square(true, false, true, false, 0, 2);
        fixedSquares[0][3] = new Square(true, false, false, false, 0, 3);
@@ -31,12 +27,8 @@ public class P4TinyDriver
        fixedSquares[4][2] = new Square(false, false, true, true, 4, 2);
        fixedSquares[4][3] = new Square(true, false, true, false, 4, 3);
        fixedSquares[4][4] = new Square(false, true, true, false, 4, 4); 
-       
-       testMaze();
-    }
-    private static void testMaze() throws Exception
-    {
-        Maze maze, maze2;
+
+       Maze maze, maze2;
         Explorer ex;
         Treasure t1, t2;
         Monster m1, m2;
@@ -57,19 +49,9 @@ public class P4TinyDriver
         maze.addRandomOccupant(m1);
         maze.addRandomOccupant(m2);
         
-        try {   
-            maze.writeMazeToFile("test3.txt");  // should be identical to mazeGood.txt
-            maze.readMazeFromFile("test.txt");
-            // comment the stuff after this out to test initial "write" code
-            maze2 = new Maze();
-            maze2.readMazeFromFile("test.txt"); // or read from mazeGood.txt
-
-            // try also reading from a known bad file to see if exceptions are thrown.        
-            System.out.println("No Exceptions.");
-        } catch (MazeReadException e) {
-            System.out.println("**** " + e.getMessage());
-            System.out.println("**** " + e.getLine());
-            System.out.println("**** Line: " + e.getLineNum());
-        }
-    }
+        maze2 = new Maze();
+        maze2.readMazeFromFile("test.txt"); 
+        // or read from mazeGood.txt
+        System.out.println(maze2.rows() + " " + maze2.cols() + " " + maze2.explorerName());
+	}
 }
