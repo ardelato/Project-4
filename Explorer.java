@@ -113,9 +113,12 @@ public class Explorer extends Occupant{
 	  finally call the lookAround function so the explorer knows what's in its new surroundings
 	  */
 	public void moveTo(Square s){
+		System.out.println("Its going to go to super moveTo");
 		super.moveTo(s);
 		s.enter();
+		System.out.println("Going to do lookAround");
 		m.lookAround(s);
+		System.out.println("It passed through Explorer's moveTo:");
 	}
 	public String toText(char delimiter)
 	{
@@ -123,11 +126,13 @@ public class Explorer extends Occupant{
 	}	
 	public void toObject(Scanner input)
 	{
+		System.out.println("It passed through Explorer's toObject");
 		int row = input.nextInt();
 		int col = input.nextInt();
 		Square s = new Square(row,col);
-		moveTo(s);
+		System.out.println("It passed the second portion of Explorer");
 		this.name = input.next();
+		moveTo(s);
 	}
 }
 	  

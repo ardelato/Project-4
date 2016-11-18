@@ -54,7 +54,7 @@ public class Driver
         
         maze2 = new Maze();
         try {
-        	maze2.readMazeFromFile("test.txt"); 
+        	maze2.readMazeFromFile("mazeGood.txt"); 
         } catch(IOException | MazeReadException e)
         {
         	System.out.println("IOException" + e);

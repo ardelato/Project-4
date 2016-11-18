@@ -44,7 +44,9 @@ public abstract class Occupant implements DelimitedTextIO
 		/*Simply set you Square variable equal to the new Square and then return it*/
 	public void moveTo(Square new_location)
 	{
+		System.out.println("Made it to Occupant's moveTo");
 		square_location = new_location;
+		System.out.println("Made it to Occupant's moveTo");
 	}
 	public String toText(char delimiter)
 	{

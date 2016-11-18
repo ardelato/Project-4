@@ -231,7 +231,6 @@ public class Maze
         File file = new File(fileName);
         Scanner fileReader = null;
         try{
-      
           fileReader = new Scanner(file);
           int lineCounter = 1;
           while(fileReader.hasNextLine()){
@@ -245,8 +244,9 @@ public class Maze
                 if(lineCounter == 1)
                 {
                   if(input.hasNextInt()){
-                    int rows = input.nextInt();
-                    int cols = input.nextInt();
+                    this.rows = input.nextInt();
+                    this.cols = input.nextInt();
+                    System.out.println(rows + " " + cols);
                     this.squares = new Square[rows][cols];
                   }
                   else
@@ -256,6 +256,7 @@ public class Maze
                 {
                 try{
                     String className = input.next();
+                    System.out.println(className);
                     switch(className){
                       case "Square":
                         int r = input.nextInt();
@@ -264,9 +265,16 @@ public class Maze
                         s.toObject(input);
                         if(this.squares[s.row()][s.col()] != null)
                           throw new MazeReadException("Duplicate Square", line, lineCounter);
+                        else
+                          this.squares[s.row()][s.col()] = s;
                         break;
                       case "Explorer":
-                        explorer.toObject(input);
+                        System.out.println("Will begin constructing Explorer");
+                        Explorer e =  new Explorer(this);
+                        System.out.println("Will begin constructing Explorer");
+                        e.toObject(input);
+                        this.setExplorer(e);
+                        System.out.println("Finished constructing Explorer");
                         break;
                       case "Monster":
                         Monster mon = null;
