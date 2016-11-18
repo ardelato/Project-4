@@ -1,3 +1,6 @@
+import java.io.*;
+import java.util.*;
+
 public class Driver
 {
 	public static void main(String[] args) {
@@ -50,8 +53,13 @@ public class Driver
         maze.addRandomOccupant(m2);
         
         maze2 = new Maze();
-        maze2.readMazeFromFile("test.txt"); 
+        try {
+        	maze2.readMazeFromFile("test.txt"); 
+        } catch(IOException | MazeReadException e)
+        {
+        	System.out.println("IOException" + e);
+        }
         // or read from mazeGood.txt
-        System.out.println(maze2.rows() + " " + maze2.cols() + " " + maze2.explorerName());
+        System.out.println(maze2.rows() + " " + maze2.cols());
 	}
 }
