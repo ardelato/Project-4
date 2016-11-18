@@ -47,4 +47,11 @@ public class Treasure extends RandomOccupant
 		super.toObject(input);
 		this.foundTreasure = input.nextBoolean();
 	}
+	public void moveTo(Square new_location){
+		if(this.location() != null) {
+			super.moveTo(null);
+		}
+		super.moveTo(new_location);
+		location().setTreasure(this);
+	}
 }

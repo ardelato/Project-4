@@ -123,7 +123,10 @@ public class Explorer extends Occupant{
 	}	
 	public void toObject(Scanner input)
 	{
-		super.toObject(input);
+		int row = input.nextInt();
+		int col = input.nextInt();
+		Square s = new Square(row,col);
+		moveTo(s);
 		this.name = input.next();
 	}
 }

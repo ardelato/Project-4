@@ -30,12 +30,4 @@ public class Monster extends RandomOccupant{
 	{
 		super(maze, location);
 	}
-	public String toText(char delimiter)
-	{
-		return(super.toText(delimiter));
-	}
-	public void toObject(Scanner input)
-	{
-		super.toObject(input);
-	}
 }

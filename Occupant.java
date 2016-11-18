@@ -50,13 +50,6 @@ public abstract class Occupant implements DelimitedTextIO
 	{
 		return(this.getClass().getName()+delimiter+Integer.toString(square_location.row())+delimiter+Integer.toString(square_location.col()));
 	}
-	public void toObject(Scanner input)
-	{
-		int row = input.nextInt();
-		int col = input.nextInt();
-		Square s = new Square(row,col);
-		moveTo(s);
-	}
 }
 
 	

@@ -10,7 +10,7 @@
  *@version Fall 2016
  *@version 10/28/16
  */
-import java.util.Random;
+import java.util.*;
 
 public abstract class RandomOccupant extends Occupant{
 //instance variables
@@ -98,6 +98,13 @@ public abstract class RandomOccupant extends Occupant{
 				}
 			}
 		}
+	}
+	public void toObject(Scanner input)
+	{	
+		int row = input.nextInt();
+		int col = input.nextInt();
+		Square s = new Square(row,col);
+		this.moveTo(s);
 	}
 }
 
