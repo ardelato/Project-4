@@ -88,12 +88,14 @@ public class Square implements DelimitedTextIO
 		if (this.treasure != null)
 			{treasure.setFound();}
 	}
+	//method to make this object into string format
 	public String toText(char delimiter)
 	{
 		return(this.getClass().getName() + delimiter + Integer.toString(this.row) + delimiter + Integer.toString(this.col) + 
 			delimiter + Boolean.toString(walls[UP]) + delimiter + Boolean.toString(walls[RIGHT]) + delimiter + Boolean.toString(walls[DOWN])
 			+ delimiter + Boolean.toString(walls[LEFT]) + delimiter + Boolean.toString(this.seen) + delimiter + Boolean.toString(this.in_View));
 	}
+	//method to create this object from the string
 	public void toObject(Scanner input)
 	{
 		this.walls[UP] = input.nextBoolean(); 

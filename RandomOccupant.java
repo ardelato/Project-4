@@ -99,6 +99,7 @@ public abstract class RandomOccupant extends Occupant{
 			}
 		}
 	}
+	//method to become used in subclasses for creating the object from a string
 	public void toObject(Scanner input)
 	{	
 		int row = input.nextInt();

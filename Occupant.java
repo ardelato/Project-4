@@ -46,6 +46,7 @@ public abstract class Occupant implements DelimitedTextIO
 	{ 
 		square_location = new_location;
 	}
+	//method for subclasses to use such that it will make the object into a string
 	public String toText(char delimiter)
 	{
 		return(this.getClass().getName()+delimiter+Integer.toString(square_location.row())+delimiter+Integer.toString(square_location.col()));

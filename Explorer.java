@@ -117,10 +117,12 @@ public class Explorer extends Occupant{
 		s.enter();
 		m.lookAround(s);
 	}
+	//method to make this object into a string
 	public String toText(char delimiter)
 	{
 		return (super.toText(delimiter) + delimiter + this.name);
-	}	
+	}
+	//method to create this object from the read line
 	public void toObject(Scanner input)
 	{
 		this.name = input.next();

@@ -228,13 +228,17 @@ public class Maze
         System.err.println("IOException:" + ioe.getMessage());
       }
     }
+    //read from a text file and creates a maze from what is read
     public void readMazeFromFile(String fileName) throws IOException, FileNotFoundException, MazeReadException
     {
         String delimiter = ",";
+        //intialize the file
         File file = new File(fileName);
+        //scanner 1 to read the file 
         Scanner fileReader = null;
      
           fileReader = new Scanner(file);
+          //counter to keep track of the line being read
           int lineCounter = 1;
          
           while(fileReader.hasNextLine()){
@@ -246,7 +250,7 @@ public class Maze
             if(!input.hasNextLine())
                 throw new MazeReadException("Line format or other error.", line, lineCounter);
             while(input.hasNext()){
-              System.out.println(lineCounter);
+                //check the first line for the row and col integers
                 if(lineCounter == 1)
                 {
                   if(input.hasNextInt()){
@@ -259,9 +263,10 @@ public class Maze
                 }
                else
                 {
-               
+                    //obtains the name of the first part of the string in order to be used for the switch
                     String className = input.next();
-                    System.out.println(className);
+                  
+                    //switch to be used for the dependent class names
                     switch(className){
                       case "Square":
                         int ro = input.nextInt();
@@ -323,8 +328,10 @@ public class Maze
                }
                lineCounter++;
             }
+          //close the second scanner
           input.close();
         }
+      //close the first scanner
       fileReader.close();
   }
 

@@ -37,16 +37,18 @@ public class Treasure extends RandomOccupant
 	{ this.foundTreasure = true;}
 	
 	public void move(){}
-
+	//method to make this object into a string
 	public String toText(char delimiter)
 	{
 		return(super.toText(delimiter) + delimiter + Boolean.toString(this.foundTreasure));
 	}
+	// method to create this object from the string 
 	public void toObject(Scanner input)
 	{
 		super.toObject(input);
 		this.foundTreasure = input.nextBoolean();
 	}
+	//method to move this square to a null location if not already null 
 	public void moveTo(Square new_location){
 		if(this.location() != null) {
 			super.moveTo(null);
