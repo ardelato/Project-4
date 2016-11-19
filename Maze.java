@@ -135,26 +135,15 @@ public class Maze
    {
       int row = s.row();
       int col = s.col();
-        
       // Clear what was previously in view
       resetInView();
         
       // Set the current square so that we are viewing it (obviously)
       s.setInView(true);
-        
       // CHANGE - Check the adjacent squares.  If there isn't a wall in the way, set their inview to true.
         
       //check if there is a wall in UP direction
-        if( s.wall(s.UP) == false){
-           (getSquare(row-1,col)).setInView(true);
-            if( getSquare(row-1,col).wall(s.LEFT) == false){
-                  (getSquare(row-1,col-1)).setInView(true);
-            }
-            if( getSquare(row-1,col).wall(s.RIGHT) == false){             
-                  (getSquare(row-1,col+1)).setInView(true);
-            }        
-        }
-      
+
        if( s.wall(s.RIGHT) == false){
             (getSquare(row,col+1)).setInView(true);
             if( getSquare(row,col+1).wall(s.UP) == false){
@@ -164,7 +153,6 @@ public class Maze
                 (getSquare(row+1,col+1)).setInView(true);
             }
         }
-    
       if( s.wall(s.DOWN) == false){
             (getSquare(row+1,col)).setInView(true);  
             if( getSquare(row+1,col).wall(s.LEFT) == false){
@@ -174,7 +162,7 @@ public class Maze
                 (getSquare(row+1,col+1)).setInView(true);
             }
        }
-      
+
       if( s.wall(s.LEFT) == false){
             (getSquare(row,col-1)).setInView(true);
             if( getSquare(row,col-1).wall(s.UP) == false){
@@ -183,7 +171,16 @@ public class Maze
             if( getSquare(row,col-1).wall(s.DOWN) == false){
                 (getSquare(row+1,col-1)).setInView(true);
             }
-      }    
+        }
+        if( s.wall(s.UP) == false){
+           (getSquare(row-1,col)).setInView(true);
+            if( getSquare(row-1,col).wall(s.LEFT) == false){
+                  (getSquare(row-1,col-1)).setInView(true);
+            }
+            if( getSquare(row-1,col).wall(s.RIGHT) == false){             
+                  (getSquare(row-1,col+1)).setInView(true);
+            }        
+        }
     }
    private void resetInView()
    {
@@ -198,8 +195,6 @@ public class Maze
       try{
         char delimiter = ',';
         File file = new File(fileName);
-        if(!file.exists())
-          file.createNewFile();
         FileWriter writer = new FileWriter(file.getName());
         BufferedWriter bwriter = new BufferedWriter(writer);
         bwriter.write(Integer.toString(this.rows) + delimiter + Integer.toString(this.cols));
@@ -246,7 +241,6 @@ public class Maze
                   if(input.hasNextInt()){
                     this.rows = input.nextInt();
                     this.cols = input.nextInt();
-                    System.out.println(rows + " " + cols);
                     this.squares = new Square[rows][cols];
                   }
                   else
@@ -265,24 +259,26 @@ public class Maze
                         s.toObject(input);
                         if(this.squares[s.row()][s.col()] != null)
                           throw new MazeReadException("Duplicate Square", line, lineCounter);
-                        else
+                        else{
                           this.squares[s.row()][s.col()] = s;
+                        }
                         break;
                       case "Explorer":
-                        System.out.println("Will begin constructing Explorer");
                         Explorer e =  new Explorer(this);
-                        System.out.println("Will begin constructing Explorer");
+                        int rol = input.nextInt();
+                        int cow = input.nextInt(); 
+                        Square sq = squares[rol][cow];
                         e.toObject(input);
+                        e.moveTo(sq);
                         this.setExplorer(e);
-                        System.out.println("Finished constructing Explorer");
                         break;
                       case "Monster":
-                        Monster mon = null;
+                        Monster mon = new Monster(this);
                         mon.toObject(input);
                         randOccupants.add(mon);
                         break;
                       case "Treasure":
-                        Treasure t = null;
+                        Treasure t = new Treasure(this);
                         t.toObject(input);
                         randOccupants.add(t);
                         break;

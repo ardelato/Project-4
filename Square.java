@@ -98,8 +98,11 @@ public class Square implements DelimitedTextIO
 	{
 		this.walls[UP] = input.nextBoolean(); 
 		this.walls[RIGHT] = input.nextBoolean();
+
 		this.walls[DOWN] = input.nextBoolean();
+
 		this.walls[LEFT] = input.nextBoolean();
+
 		this.seen = input.nextBoolean();
 		this.in_View = input.nextBoolean();
 	}

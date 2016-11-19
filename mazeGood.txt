@@ -24,8 +24,8 @@ Square,4,1,false,true,true,true,false,false
 Square,4,2,false,false,true,true,false,false
 Square,4,3,true,false,true,false,false,false
 Square,4,4,false,true,true,false,false,false
-Explorer,0,0,Scary Name
 Treasure,4,4,true
 Treasure,2,2,false
 Monster,4,4
 Monster,3,3
+Explorer,2,2,Scary Name
