@@ -233,15 +233,18 @@ public class Maze
         String delimiter = ",";
         File file = new File(fileName);
         Scanner fileReader = null;
-        try{
+     
           fileReader = new Scanner(file);
           int lineCounter = 1;
+         
           while(fileReader.hasNextLine()){
-       
+             
             String line = fileReader.nextLine();
             //starting to read each string within the line
             Scanner input = new Scanner(line).useDelimiter(delimiter);
             // starting to read each line
+            if(!input.hasNextLine())
+                throw new MazeReadException("Line format or other error.", line, lineCounter);
             while(input.hasNext()){
               System.out.println(lineCounter);
                 if(lineCounter == 1)
@@ -256,19 +259,24 @@ public class Maze
                 }
                else
                 {
-                try{
+               
                     String className = input.next();
                     System.out.println(className);
                     switch(className){
                       case "Square":
-                        int r = input.nextInt();
-                        int c = input.nextInt(); 
-                        Square s = new Square(r,c);
-                        s.toObject(input);
-                        if(this.squares[s.row()][s.col()] != null)
-                          throw new MazeReadException("Duplicate Square", line, lineCounter);
+                        int ro = input.nextInt();
+                        int co = input.nextInt(); 
+                        Square s = new Square(ro,co);
+                        try{
+                          s.toObject(input);}
+                        catch(Exception a)
+                        {
+                          throw new MazeReadException("Line format or other error.", line, lineCounter);
+                        }
+                        if(squares[ro][co] != null)
+                          throw new MazeReadException("Duplicate square.", line, lineCounter);
                         else{
-                          this.squares[s.row()][s.col()] = s;
+                          this.squares[ro][co] = s;
                         }
                         break;
                       case "Explorer":
@@ -276,33 +284,48 @@ public class Maze
                         int rol = input.nextInt();
                         int cow = input.nextInt(); 
                         Square sq = squares[rol][cow];
-                        e.toObject(input);
+                        try{
+                          e.toObject(input);
+                        }
+                        catch(Exception b)
+                        {
+                          throw new MazeReadException("Line format or other error.", line, lineCounter);
+                        }
                         e.moveTo(sq);
                         this.setExplorer(e);
                         break;
                       case "Monster":
                         Monster mon = new Monster(this);
-                        mon.toObject(input);
+                        try{
+                         mon.toObject(input);
+                        }
+                        catch(Exception c)
+                        {
+                          throw new MazeReadException("Line format or other error.", line, lineCounter);
+                        }
                         randOccupants.add(mon);
                         break;
                       case "Treasure":
                         Treasure t = new Treasure(this);
-                        t.toObject(input);
+                        try{
+                         t.toObject(input);
+                        }
+                        catch(Exception d)
+                        {
+                          throw new MazeReadException("Line format or other error.", line, lineCounter);
+                        }
                         randOccupants.add(t);
                         break;
                       default:
                         throw new MazeReadException("Unknown type.", line, lineCounter);
                     } 
-                  }catch(Exception e) {
-                    throw new MazeReadException("Line format or other error", line, lineCounter);
-                  }
+      
                }
                lineCounter++;
             }
           input.close();
         }
       fileReader.close();
-    } catch(IOException ex) { }
   }
 
 }
