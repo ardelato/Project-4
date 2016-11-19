@@ -195,27 +195,35 @@ public class Maze
       try{
         char delimiter = ',';
         File file = new File(fileName);
-        FileWriter writer = new FileWriter(file.getName());
-        BufferedWriter bwriter = new BufferedWriter(writer);
-        bwriter.write(Integer.toString(this.rows) + delimiter + Integer.toString(this.cols));
-        bwriter.newLine();
+        PrintWriter writer = new PrintWriter(file);
+        writer.print(Integer.toString(this.rows) + delimiter + Integer.toString(this.cols));
+        writer.println();
         for(int x = 0; x < rows; x++)
         {  for(int y = 0; y < cols; y++)
             {
-              bwriter.write(squares[x][y].toText(delimiter));
-              bwriter.newLine();
+              writer.print(squares[x][y].toText(delimiter));
+              writer.println();
             }
         }
         if (explorer != null){
-          bwriter.write(explorer.toText(delimiter));
-          bwriter.newLine();
+          writer.print(explorer.toText(delimiter));
+          writer.println();
         }
         for(int i = 0; i < randOccupants.size(); i++)
         {
-          bwriter.write(randOccupants.get(i).toText(delimiter));
-          bwriter.newLine();
+          if(randOccupants.get(i) instanceof Treasure){
+            writer.print(randOccupants.get(i).toText(delimiter));
+            writer.println();
+          } 
         }
-        bwriter.close();
+        for(int i = 0; i < randOccupants.size(); i++)
+        {
+          if(randOccupants.get(i) instanceof Monster){
+            writer.print(randOccupants.get(i).toText(delimiter));
+            writer.println();
+          }
+        }
+        writer.flush();
       } catch (IOException ioe) {
         System.err.println("IOException:" + ioe.getMessage());
       }
@@ -283,7 +291,7 @@ public class Maze
                         randOccupants.add(t);
                         break;
                       default:
-                        throw new MazeReadException("Unknown type", line, lineCounter);
+                        throw new MazeReadException("Unknown type.", line, lineCounter);
                     } 
                   }catch(Exception e) {
                     throw new MazeReadException("Line format or other error", line, lineCounter);
